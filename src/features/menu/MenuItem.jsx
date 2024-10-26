@@ -1,12 +1,19 @@
 import { useDispatch, useSelector } from "react-redux";
 import Button from "../../ui/Button";
 import { formatCurrency } from "../../utils/helpers";
-import { addItem, deleteItem, getCurrentQuantityById } from "../cart/cartSlice"; 
+import { addItem, deleteItem, getCurrentQuantityById } from "../cart/cartSlice";
 import UpdateQuantity from "../cart/UpdateQuantity";
 
 function MenuItem({ pizza }) {
   const dispatch = useDispatch();
-  const { id:pizzaId, name, unitPrice, ingredients, soldOut, imageUrl } = pizza;
+  const {
+    id: pizzaId,
+    name,
+    unitPrice,
+    ingredients,
+    soldOut,
+    imageUrl,
+  } = pizza;
 
   const currentQuantity = useSelector(getCurrentQuantityById(pizzaId));
   const isInCart = currentQuantity > 0;
@@ -19,22 +26,22 @@ function MenuItem({ pizza }) {
       unitPrice,
       totalPrice: unitPrice * 1,
     };
-    dispatch(addItem(newItem)); 
+    dispatch(addItem(newItem));
   };
 
   return (
-    <li className="flex grow gap-4 py-5">
+    <li className="flex sm:flex-row flex-col items-center grow gap-4 gap-y-8 py-5">
       <img
-        className={`h-24 -rotate-3 rounded-md border shadow-lg shadow-slate-800 ${soldOut ? "opacity-75 grayscale" : ""}`}
+        className={`sm:w-40 w-32 sm:h-32 object-cover h-auto -rotate-3 rounded-md border shadow-lg shadow-slate-800 ${soldOut ? "opacity-75 grayscale" : ""}`}
         src={imageUrl}
         alt={name}
       />
-      <div className="flex grow flex-col">
-        <h2 className="inline-block self-start border-b-4 border-yellow-400 px-1 text-2xl text-slate-900">
+      <div className="flex grow flex-col sm:gap-y-2 gap-y-4">
+        <h2 className="inline-block sm:self-start self-center border-b-4 border-yellow-400 px-1 text-2xl text-slate-900">
           {name}
         </h2>
-        <p className="italic">{ingredients.join(", ")}</p>
-        <div className="mt-auto flex items-center justify-between">
+        <p className="italic sm:text-left text-center">{ingredients.join(", ")}</p>
+        <div className="mt-auto flex sm:flex-row flex-col gap-y-4 items-center justify-between">
           {!soldOut ? (
             <p>{formatCurrency(unitPrice)}</p>
           ) : (

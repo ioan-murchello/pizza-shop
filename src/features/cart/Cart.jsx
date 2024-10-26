@@ -33,16 +33,18 @@ function Cart() {
   const dispatch = useDispatch();
 
   return (
-    <div>
+    <div className="mx-4">
       <Link className="text-blue-500 hover:text-blue-600" to="/menu">
         &larr; Back to menu
       </Link>
 
       {cart.length > 0 && <h2>Your cart, {userName}</h2>}
 
-      {cart.map((cart) => (
-        <CartItem item={cart} key={cart.pizzaId} />
-      ))}
+      <ul className="my-4">
+        {cart.map((cart) => {
+          return <CartItem item={cart} key={cart.pizzaId} />;
+        })}
+      </ul>
 
       {cart.length > 0 ? (
         <div className="flex gap-3">
@@ -53,7 +55,11 @@ function Cart() {
             Clear cart
           </Button>
         </div>
-      ) : <p className="text-xl">Your cart is still empty. Start adding some pizzas 🍕</p>}
+      ) : (
+        <p className="text-xl">
+          Your cart is still empty. Start adding some pizzas 🍕
+        </p>
+      )}
     </div>
   );
 }

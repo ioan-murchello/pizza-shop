@@ -4,8 +4,10 @@ const UserName = () => {
   const { userName } = useSelector((state) => state.user);
 
   return (
-    <div className="inline-block self-start border-b px-1 pb-1 text-sm font-semibold">
-      Welcome {userName && userName}!
+    <div className="p-2 font-semibold text-sm text-center"> Welcome {' '}
+      <span className="border-b px-1 pb-1 text-sm font-semibold">
+          {userName && userName}!
+      </span>
     </div>
   );
 };

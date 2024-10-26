@@ -89,7 +89,7 @@ function CreateOrder() {
       </h2>
 
       <Form className="flex w-full flex-col gap-x-3 gap-y-4 p-5" method="POST">
-        <div className="mb-5 flex items-center gap-2">
+        <div className="mb-5 flex flex-col items-center gap-2 sm:flex-row">
           <label className="min-w-32">First name</label>
           <input
             className="w-full rounded-md border-2 p-2"
@@ -100,7 +100,7 @@ function CreateOrder() {
           />
         </div>
 
-        <div className="mb-5 flex items-center gap-2">
+        <div className="mb-5 flex flex-col items-center gap-2 sm:flex-row">
           <label className="min-w-32">Phone number</label>
           <input
             className="w-full rounded-md border-2 p-2"
@@ -110,31 +110,32 @@ function CreateOrder() {
           />
         </div>
 
-        <div className="relative mb-5 flex w-full items-center gap-2">
+        <div className="relative mb-5 flex w-full flex-col items-center gap-2 sm:flex-row">
           <label className="min-w-32">Address</label>
-          <input
-            className="grow rounded-md border-2 p-2"
-            type="text"
-            name="address"
-            disabled={isLoadingAddress}
-            defaultValue={address}
-            required
-          />
-
-          {!address && (
-            <span className="absolute right-[3px]">
-              <Button
-                disabled={isLoadingAddress}
-                type="small"
-                onClick={(e) => {
-                  e.preventDefault();
-                  dispatch(fetchAdress());
-                }}
-              >
-                My Position
-              </Button>
-            </span>
-          )}
+          <div className="flex sm:flex-row flex-col items-center w-full relative">
+            <input
+              className="sm:grow w-full rounded-md border-2 p-2"
+              type="text"
+              name="address"
+              disabled={isLoadingAddress}
+              defaultValue={address}
+              required
+            />
+            {!address && (
+              <span className=" ">
+                <Button
+                  disabled={isLoadingAddress}
+                  type="small"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    dispatch(fetchAdress());
+                  }}
+                >
+                  My Position
+                </Button>
+              </span>
+            )}
+          </div>
         </div>
         {errorAddress && (
           <span className="relative right-0 top-[-25px] inline-block self-end bg-rose-200 px-2 text-right">

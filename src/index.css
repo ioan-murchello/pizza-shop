@@ -8,7 +8,7 @@
 
 @layer components {
   .input {
-    @apply rounded-full w-80 bg-stone-200 px-4 py-2 text-sm outline-yellow-500 transition-all duration-300 placeholder:text-stone-500 focus:w-96;
+    @apply rounded-full md:w-80 w-64 bg-stone-200 px-4 py-2 text-sm outline-yellow-500 transition-all duration-300 placeholder:text-stone-500 focus:w-96;
   }
 }
 
