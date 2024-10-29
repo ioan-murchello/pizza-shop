@@ -3,6 +3,7 @@ import Button from "../../ui/Button";
 import { useDispatch } from "react-redux";
 import { updateName } from "./userSlice";
 import { useNavigate } from "react-router-dom";
+import { setLocalStorage } from "../../utils/helpers";
 
 function CreateUser() {
   const dispatch = useDispatch()
@@ -13,6 +14,7 @@ function CreateUser() {
     e.preventDefault();
     if(!username) return 
     dispatch(updateName(username))
+    setLocalStorage('name', username)
     navigate('/menu')
   }
 
@@ -24,7 +26,7 @@ function CreateUser() {
         className="input"
         type="text"
         placeholder="Your full name"
-        value={username}
+        defaultValue={username}
         onChange={(e) => setUsername(e.target.value)}
       />
 

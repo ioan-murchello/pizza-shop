@@ -3,6 +3,7 @@ import Button from "../../ui/Button";
 import CartItem from "./CartItem";
 import { useDispatch, useSelector } from "react-redux";
 import { clearCart } from "./cartSlice";
+import { getLocalStorage } from "../../utils/helpers";
 // const fakeCart = [
 //   {
 //     pizzaId: 12,
@@ -28,7 +29,8 @@ import { clearCart } from "./cartSlice";
 // ];
 
 function Cart() {
-  const { userName } = useSelector((store) => store.user);
+  const nameFromLocalStorage = getLocalStorage('user')
+  // const { userName } = useSelector((store) => store.user);
   const { cart } = useSelector((store) => store.cart);
   const dispatch = useDispatch();
 
@@ -38,7 +40,7 @@ function Cart() {
         &larr; Back to menu
       </Link>
 
-      {cart.length > 0 && <h2>Your cart, {userName}</h2>}
+      {cart.length > 0 && <h2>Your cart, {nameFromLocalStorage}</h2>}
 
       <ul className="my-4">
         {cart.map((cart) => {

@@ -1,12 +1,21 @@
-import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { getLocalStorage } from "../../utils/helpers";
 
 const UserName = () => {
-  const { userName } = useSelector((state) => state.user);
-
+  const [name, setName] = useState(null);
+  useEffect(() => {
+    const getLocalName = getLocalStorage("user");
+    if (getLocalName) {
+      setName(getLocalName);
+    }
+  }, [name]);
   return (
-    <div className="p-2 font-semibold text-sm text-center"> Welcome {' '}
+    <div className="p-2 text-center text-sm font-semibold">
+      {" "}
+      Welcome{" "}
       <span className="border-b px-1 pb-1 text-sm font-semibold">
-          {userName && userName}!
+        {/* {userName && `${userName}!`} */}
+        {name && `${name}!`}
       </span>
     </div>
   );

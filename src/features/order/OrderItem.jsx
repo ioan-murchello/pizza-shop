@@ -14,7 +14,7 @@ function OrderItem({ item, ingredients, isLoadingIngredients }) {
             {isLoadingIngredients ? "loading..." : ingredients.join(", ")}
           </span>
         </div>
-        <p>{formatCurrency(totalPrice)}</p>
+        <p className="bg-yellow-400">{formatCurrency(totalPrice)}</p>
       </div>
     </li>
   );

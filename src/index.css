@@ -8,7 +8,7 @@
 
 @layer components {
   .input {
-    @apply rounded-full md:w-80 w-64 bg-stone-200 px-4 py-2 text-sm outline-yellow-500 transition-all duration-300 placeholder:text-stone-500 focus:w-96;
+    @apply sm:w-[33%] w-full rounded-full bg-stone-200 px-4 py-2 text-sm outline-yellow-500 transition-all duration-300 placeholder:text-stone-500 sm:focus:w-[45%]
   }
 }
 
@@ -16,15 +16,7 @@ body {
   font-family: "Roboto Mono", BlinkMacSystemFont, "Segoe UI", Roboto;
   font-weight: 500;
 }
-
-/* .layout {
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-  gap: 32px;
-  height: 100dvh;
-} */
-
-
+ 
 /* https://dev.to/afif/i-made-100-css-loaders-for-your-next-project-4eje */
 .loader {
   width: 45px;

@@ -7,6 +7,7 @@ import { clearCart, getTotalPrice } from "../cart/cartSlice";
 import store from "../../store";
 import { useState } from "react";
 import { fetchAdress } from "../user/userSlice";
+import { getLocalStorage } from "../../utils/helpers";
 
 // const fakeCart = [
 //   {
@@ -67,13 +68,13 @@ function CreateOrder() {
 
   const isSubmitting = navigation.state === "submitting";
 
-  const {
-    userName,
+  const { 
     status: addressStatus,
     position,
     address,
     error: errorAddress,
   } = useSelector((store) => store.user);
+  const fromLocalStorage = getLocalStorage('user')
   const isLoadingAddress = addressStatus === "loading";
   const { cart } = useSelector((store) => store.cart);
   const totalCartPrice = useSelector((store) => getTotalPrice(store));
@@ -95,7 +96,7 @@ function CreateOrder() {
             className="w-full rounded-md border-2 p-2"
             type="text"
             name="customer"
-            defaultValue={userName ? userName : ""}
+            defaultValue={fromLocalStorage ? fromLocalStorage : ""}
             required
           />
         </div>
@@ -112,9 +113,9 @@ function CreateOrder() {
 
         <div className="relative mb-5 flex w-full flex-col items-center gap-2 sm:flex-row">
           <label className="min-w-32">Address</label>
-          <div className="flex sm:flex-row flex-col items-center w-full relative">
+          <div className="relative flex w-full flex-col items-center sm:flex-row">
             <input
-              className="sm:grow w-full rounded-md border-2 p-2"
+              className="w-full rounded-md border-2 p-2 sm:grow"
               type="text"
               name="address"
               disabled={isLoadingAddress}
@@ -122,7 +123,7 @@ function CreateOrder() {
               required
             />
             {!address && (
-              <span className=" ">
+              <span className="mx-2">
                 <Button
                   disabled={isLoadingAddress}
                   type="small"
