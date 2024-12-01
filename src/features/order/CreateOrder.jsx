@@ -7,7 +7,7 @@ import { clearCart, getTotalPrice } from "../cart/cartSlice";
 import store from "../../store";
 import { useState } from "react";
 import { fetchAdress } from "../user/userSlice";
-import { getLocalStorage } from "../../utils/helpers";
+import { formatCurrency, getLocalStorage } from "../../utils/helpers";
 
 // const fakeCart = [
 //   {
@@ -78,7 +78,7 @@ function CreateOrder() {
   const isLoadingAddress = addressStatus === "loading";
   const { cart } = useSelector((store) => store.cart);
   const totalCartPrice = useSelector((store) => getTotalPrice(store));
-  const priorityPrice = withPriority ? Math.floor(totalCartPrice * 0.2) : 0;
+  const priorityPrice = withPriority ? Math.ceil(totalCartPrice * 0.2) : 0;
   const totalPrice = totalCartPrice + priorityPrice;
 
   if (!cart.length) return <EmptyCart />;
@@ -159,7 +159,10 @@ function CreateOrder() {
             onChange={(e) => setWithPriority(e.target.checked)}
           />
           <label className="cursor-pointer" htmlFor="priority">
-            Want to yo give your order priority? {withPriority && totalPrice}
+            Want to yo give your order priority?{" "}
+            {withPriority && (
+              <>{`+${formatCurrency(priorityPrice)} (${formatCurrency(totalPrice)})`}</>
+            )}
           </label>
         </div>
         <div>
